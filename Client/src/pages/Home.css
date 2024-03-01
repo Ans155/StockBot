@@ -1,0 +1,122 @@
+/* home.css */
+
+/* Header */
+header {
+    background-color: #ffffff;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #dddddd;
+  }
+  
+  .menu button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#ff6611; /* Semi-transparent overlay */
+    z-index: 3; /* Ensure navigation is above other content */
+  }
+  
+  .navItems {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80%; /* Adjust as needed */
+    height: 100%;
+    background-color: #ffffff;
+    padding: 16px;
+  }
+  
+  .navCloseIcon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    cursor: pointer;
+  }
+  
+  /* Side Menu */
+  .sideMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px; /* Adjust as needed */
+    background-color: #ffffff;
+    z-index: 2; /* Ensure side menu is above other content */
+    padding: 16px;
+    border-right: 1px solid #dddddd; /* Separator */
+  }
+  
+  /* Chat Box */
+  .chatBox {
+    margin-left: 200px; /* Ensure chat box content is not obscured by side menu */
+    padding: 16px;
+  }
+  
+  /* Chat Log */
+  .chatLogWrapper {
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: calc(100vh - 200px); /* Adjust as needed */
+  }
+  
+  .chatLog {
+    margin-bottom: 16px; /* Spacing between chat log items */
+  }
+  
+  /* Chat Prompt */
+  .chatPromptMainContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .chatPromptWrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Bot Message */
+  .botMessageMainContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .botMessageWrapper {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Input Prompt Wrapper */
+  .inputPromptWrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 16px; /* Spacing between input prompt and chat log */
+  }
+  
+  .inputPrompttTextarea {
+    flex: 1; /* Take remaining space */
+    padding: 12px;
+    border: 1px solid #dddddd;
+    border-radius: 8px;
+  }
+  
+  .inputPrompttTextarea:focus {
+    outline: none;
+  }
+  
+  button[type="submit"] {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: 8px; /* Spacing between input prompt and submit button */
+  }
+  
