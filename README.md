@@ -22,7 +22,87 @@ StockBot is an intelligent chatbot designed to provide accurate answers related 
 
 To deploy StockBot locally, follow these steps:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/stockbot.git
+## Installing Python
+Python is required to run StockBot. If you don't have Python installed, follow these steps:
+
+### For Windows:
+Download the latest Python installer from the official Python website.
+Run the installer and make sure to check the box that says `Add Python to PATH` during installation.
+
+### For macOS:
+You can install Python using Homebrew, a package manager for macOS, with the following command in the terminal:
+```
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+Then install Python:
+```
+brew install python
+```
+## Setting Up a Virtual Environment
+It's recommended to use a virtual environment to avoid conflicts with other projects or system-wide Python packages.
+
+### Install the virtualenv package:
+First, ensure you have pip installed (it comes with Python if you're using version 3.4 and above).
+Install virtualenv by running:
+```
+pip install virtualenv
+```
+
+### Create a Virtual Environment:
+Navigate to your project's directory in the terminal.
+Run the following command to create a virtual environment named venv (you can name it anything you like):
+```
+Python -m virtualenv venv
+```
+
+### Activate the Virtual Environment:
+- On Windows, activate the virtual environment by running:
+```
+venv\Scripts\activate
+```
+
+- On macOS and Linux, activate it with:
+```
+source venv/bin/activate
+```
+
+Once your virtual environment is activated, you'll see its name in the terminal prompt. Now you're ready to use StockBot.
+
+## Installing Required Packages
+
+With the virtual environment activated, you can now install the required packages for StockBot. This is done using the `pip` package manager. Follow these steps:
+
+1. Navigate to the directory containing the `requirements.txt` file in the terminal.
+2. Run the following command to install the required packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Ingesting Data
+
+To ingest data into StockBot, follow these steps:
+
+1. Navigate to the `server` directory in the terminal.
+2. Locate the `upload.py` script.
+3. Run the following command to execute the script:
+
+```bash
+Python upload.py
+```
+## Running the FastAPI
+
+To run the FastAPI backend server for StockBot, follow these steps:
+
+1. Navigate to the `server` directory in the terminal.
+2. Locate the `test.py` script.
+3. Run the following command to start the FastAPI server:
+
+```bash
+uvicorn app:test --reload
+```
+This command will start the FastAPI server, allowing StockBot to process user queries and generate responses.
+Once the server is up and running, StockBot is ready to use.
+
 
