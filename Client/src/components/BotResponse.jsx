@@ -37,7 +37,7 @@ const BotResponse = ({ response, chatLogRef }) => {
 
   return (
     <>
-      <pre>
+     <pre style={{ whiteSpace: "pre-wrap" }}>
         {botResoponse}
         {botResoponse === response ? "" : "|"}
       </pre>
