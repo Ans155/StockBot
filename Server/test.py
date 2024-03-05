@@ -22,12 +22,13 @@ from langchain.memory import (
     VectorStoreRetrieverMemory,
 )
 from langchain.chains import ConversationChain
-from langchain.callbacks.base import BaseCallbackHandler
+from langchain_community.vectorstores import AstraDB
+from langchain_core.output_parsers import StrOutputParser
 load_dotenv()     
 os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-memory = ConversationBufferMemory(memory_key="chat_history", input_key="human_input")
+memory = ConversationBufferWindowMemory(memory_key="chat_history", input_key="human_input",k=3)
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -36,6 +37,7 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
+
 
 class QuestionRequest(BaseModel):
     question: str
@@ -79,25 +81,46 @@ def get_conversational_chain():
     #     verbose=True,
     #     memory=ConversationBufferMemory(ai_prefix="Agent"),
     # )
+    # parser = StrOutputParser()
+    # chain = prompt | model | parser
+
 
     chain = load_qa_chain(model, chain_type="stuff",memory=memory,prompt=prompt)
     #print(prompt)
     return chain
 
 def user_input(user_question):
-    embeddings = HuggingFaceInstructEmbeddings( model_name="sentence-transformers/all-MiniLM-L6-v2")
-    
-    new_db = FAISS.load_local("faiss_index", embeddings)
-    docs = new_db.similarity_search(user_question)
-    #print(docs)
-    if not docs:  
-        model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.3)
-        generated_response = model(user_question)
-        print("nahi mila bas")
-    chain = get_conversational_chain()
-    response = chain({"input_documents": docs, "human_input": user_question}, return_only_outputs=True)
-    print(chain.memory.buffer)
-    return response["output_text"]
+    #embeddings = HuggingFaceInstructEmbeddings( model_name="sentence-transformers/all-MiniLM-L6-v2")
+    embeddings = HuggingFaceInstructEmbeddings( model_name="hkunlp/instructor-large")
+    astra_db_application_token = "AstraCS:caMHvgsIrkHpjTCAoyhRnsRK:945bdbb46d23f616e73a5a3675bcbfa6353152446500bec0e2ab1185119736f3"
+    astra_db_api_endpoint = "https://328b1b9d-5197-46ee-9b0b-5435b0c3543a-us-east1.apps.astra.datastax.com"
+    vstore = AstraDB(
+        embedding=embeddings,
+        collection_name="pdfdata",
+        token=astra_db_application_token,
+        api_endpoint=astra_db_api_endpoint
+    )
+    # new_db = FAISS.load_local("faiss_index", embeddings)
+    # docs = new_db.similarity_search(user_question)
+    relevant_docs = vstore.similarity_search(user_question, astra_db_application_token="AstraCS:caMHvgsIrkHpjTCAoyhRnsRK:945bdbb46d23f616e73a5a3675bcbfa6353152446500bec0e2ab1185119736f3", search_kwargs={"k": 2})
+
+    prompt_template = """
+    Answer the question as detailed as possible from the provided context, make sure to provide all the details. If the answer is not available in the provided context just try to answer without context but keeping chat_history in mind. Try add two Logical follow up questions in next line that can be asked by the user at the end of generated answer with the heading "Want to know more?, ask these follow up questions :"\n\n
+    Current conversation:
+    {chat_history}
+    Context:\n {context}?\n 
+    Question: \n{human_input}\n
+
+    Answer:
+    """
+    model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.8)
+    chain =get_conversational_chain()
+
+    response = chain({"input_documents": relevant_docs, "human_input": user_question}, return_only_outputs=True)
+
+
+   # print(chain.memory.buffer)
+    return response['output_text']
 
 @app.options("/answer/")
 async def options_answer():
@@ -106,6 +129,5 @@ async def options_answer():
 async def get_answer(request: QuestionRequest):
     question = request.question
     answer=user_input(question)
-    #print(answer)
-    
+    print(answer)
     return {"answer": answer}

@@ -35,7 +35,7 @@ const Home = () => {
 
       async function callAPI() {
         try {
-          const response = await axios.post('https://4df8-35-204-16-226.ngrok-free.app/hello', { question: inputPrompt });
+          const response = await axios.post('http://127.0.0.1:8000/answer/', { question: inputPrompt });
           console.log(response.data.answer)
           setChatLog([
             ...chatLog,
