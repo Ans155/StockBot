@@ -1,9 +1,10 @@
-# StockBot
+# StockBot : Your Personal Investment Assistant
 
 StockBot is an intelligent chatbot designed to provide accurate answers related to stock market queries. Built on the Retrieval Augmented Generation (RAG) structure, StockBot leverages the power of two cutting-edge language models: Gemini Pro and Llama-2-7B. With its vast knowledge base encompassing PDFs and documents, StockBot delivers precise responses to user inquiries, making it an indispensable tool for investors and traders alike.
 
 ![image](https://github.com/Ans155/StockBot/assets/110165397/a684fc5b-68a2-4b6d-8764-20bb9095f243)
 
+  
 ## Features
 
 - **Advanced Models**: StockBot harnesses the capabilities of Gemini Pro and Llama-2-7B models, enabling it to understand complex queries and generate informative responses.
@@ -18,7 +19,28 @@ StockBot is an intelligent chatbot designed to provide accurate answers related 
 
 - **Backend Processing**: Powered by Python FastAPI, StockBot's backend handles the heavy lifting of processing queries and generating responses, ensuring robust performance.
 
-## Installation
+## Front-end
+- HTML, CSS
+- JavaScript
+- ReactJs
+- Material UI
+
+## Back-end
+- Python
+- FastAPI
+- Langchain
+
+## Database
+- Datastax AstraDB (Vector Database)
+- FAISS
+
+## LLM and Embedding Models 
+- TheBloke/Llama-2-7B-chat-GPTQ
+- Google Gemini Pro
+- hkunlp/instructor-large
+
+
+## Installation and Set-up for Backend
 
 To deploy StockBot locally, follow these steps:
 
@@ -79,8 +101,9 @@ With the virtual environment activated, you can now install the required package
 ```bash
 pip install -r requirements.txt
 ```
+Get a Google Gemini Api key and Create a Datastax AstraDB and set Datastax AstraDB token, Datastax AstraDB api endpoint and Google Gemini Api key in environment variables.
 
-## Ingesting Data
+## DATA INGESTION
 
 To ingest data into StockBot, follow these steps:
 
@@ -105,4 +128,17 @@ uvicorn app:test --reload
 This command will start the FastAPI server, allowing StockBot to process user queries and generate responses.
 Once the server is up and running, StockBot is ready to use.
 
+# Installation and Set-up for Frontend
+
+Install dependencies for the client:
+
+```bash
+cd client
+npm install
+```
+
+Start the client :
+
+In the client directory, run npm start to start the React app.
+Access the app in your browser at http://localhost:3000.
 
