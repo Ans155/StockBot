@@ -101,7 +101,7 @@ With the virtual environment activated, you can now install the required package
 ```bash
 pip install -r requirements.txt
 ```
-Get a Google Gemini Api key and Create a Datastax AstraDB and set Datastax AstraDB token, Datastax AstraDB api endpoint and Google Gemini Api key in environment variables.
+Obtain a Google Gemini API key and create a DataStax AstraDB account. Configure a new database and set DataStax AstraDB token, DataStax AstraDB API endpoint, and Google Gemini API key as environment variables.
 
 ## Data Ingestion
 
@@ -142,3 +142,6 @@ Start the client :
 In the client directory, run npm start to start the React app.
 Access the app in your browser at http://localhost:3000.
 
+## Testing the App
+
+To test the functionalities of our app, utilize the provided `.ipynb` files. Open `Bot_using_LLAMA2.ipynb` for StockBot with Llama2 LLM or `Bot_using_GeminiAPI.ipynb` for StockBot with Gemini LLM in Google Colab or any other virtual environment of your choice to experiment with the app.
