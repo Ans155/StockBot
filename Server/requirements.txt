@@ -1,9 +1,15 @@
 streamlit
 google-generativeai
 python-dotenv
-langchain
+langchain==0.0.266
 PyPDF2
 faiss-cpu
 langchain_google_genai
 --upgrade astrapy
 langchain_community
+pypdf==3.15.0
+requests
+fastapi
+uvicorn
+sentence_transformers==2.2.2
+InstructorEmbedding==1.0.1

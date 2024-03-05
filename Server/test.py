@@ -27,7 +27,8 @@ from langchain_core.output_parsers import StrOutputParser
 load_dotenv()     
 os.getenv("GOOGLE_API_KEY")
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
-
+astra_db_application_token=os.getenv("astra_db_application_token")
+astra_db_api_endpoint=os.getenv("astra_db_api_endpoint")
 memory = ConversationBufferWindowMemory(memory_key="chat_history", input_key="human_input",k=3)
 app = FastAPI()
 app.add_middleware(
@@ -74,7 +75,6 @@ def get_conversational_chain():
     model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.8)
 
     prompt = PromptTemplate(template=prompt_template, input_variables=["chat_history","context", "human_input"])
-    
     # conversation = ConversationChain(
     #     prompt=prompt,
     #     llm=model,
@@ -83,17 +83,12 @@ def get_conversational_chain():
     # )
     # parser = StrOutputParser()
     # chain = prompt | model | parser
-
-
     chain = load_qa_chain(model, chain_type="stuff",memory=memory,prompt=prompt)
-    #print(prompt)
     return chain
 
 def user_input(user_question):
     #embeddings = HuggingFaceInstructEmbeddings( model_name="sentence-transformers/all-MiniLM-L6-v2")
     embeddings = HuggingFaceInstructEmbeddings( model_name="hkunlp/instructor-large")
-    astra_db_application_token = "AstraCS:caMHvgsIrkHpjTCAoyhRnsRK:945bdbb46d23f616e73a5a3675bcbfa6353152446500bec0e2ab1185119736f3"
-    astra_db_api_endpoint = "https://328b1b9d-5197-46ee-9b0b-5435b0c3543a-us-east1.apps.astra.datastax.com"
     vstore = AstraDB(
         embedding=embeddings,
         collection_name="pdfdata",
