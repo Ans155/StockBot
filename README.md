@@ -1,4 +1,4 @@
-# StockBot : Your Personal Investment Assistant
+# StockBot : Your Personal Financial Assistant
 
 StockBot is an intelligent chatbot designed to provide accurate answers related to stock market queries. Built on the Retrieval Augmented Generation (RAG) structure, StockBot leverages the power of two cutting-edge language models: Gemini Pro and Llama-2-7B. With its vast knowledge base encompassing PDFs and documents, StockBot delivers precise responses to user inquiries, making it an indispensable tool for investors and traders alike.
 
@@ -39,7 +39,11 @@ StockBot is an intelligent chatbot designed to provide accurate answers related 
 - Google Gemini Pro
 - hkunlp/instructor-large
 
-
+## Clone the repository
+```bash
+git clone https://github.com/Ans155/StockBot.git
+cd StockBot
+```
 ## Installation and Set-up for Backend
 
 To deploy StockBot locally, follow these steps:
@@ -99,6 +103,7 @@ With the virtual environment activated, you can now install the required package
 2. Run the following command to install the required packages:
 
 ```bash
+cd server
 pip install -r requirements.txt
 ```
 Obtain a Google Gemini API key and create a DataStax AstraDB account. Configure a new database and set DataStax AstraDB token, DataStax AstraDB API endpoint, and Google Gemini API key as environment variables.
@@ -144,4 +149,4 @@ Access the app in your browser at http://localhost:3000.
 
 ## Testing the App
 
-To test the functionalities of our app, utilize the provided `.ipynb` files. Open `Bot_using_LLAMA2.ipynb` for StockBot with Llama2 LLM or `Bot_using_GeminiAPI.ipynb` for StockBot with Gemini LLM in Google Colab or any other virtual environment of your choice to experiment with the app.
+To test the functionalities of our app, utilize the provided `.ipynb` files. Open `StockBot_using_LLAMA_2.ipynb` for StockBot with Llama2 LLM or `Bot_using_GeminiAPI.ipynb` for StockBot with Gemini LLM in Google Colab or any other virtual environment of your choice to experiment with the app.
