@@ -103,7 +103,7 @@ pip install -r requirements.txt
 ```
 Get a Google Gemini Api key and Create a Datastax AstraDB and set Datastax AstraDB token, Datastax AstraDB api endpoint and Google Gemini Api key in environment variables.
 
-## DATA INGESTION
+## Data Ingestion
 
 To ingest data into StockBot, follow these steps:
 
